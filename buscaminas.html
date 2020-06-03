@@ -1,0 +1,1103 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BUSCAMINAS.</title>
+  	<link rel="stylesheet" type="text/css" href="menu.css">
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+<div id="container"></div>
+  <script type="text/babel">
+  alert("\nJUEGO DE BUSCAMINAS.\nALDAZ CONTRERAS DANIELA.\n GARCIA GARCIA ANDREA CATALINA.\n602-A\n\n");
+  var tablas= Array(9).fill(null);
+  var destination=document.querySelector("#container");
+  var inicia=0;
+  var d=0;
+function cambiaColor(id,clase){
+    console.log("okay"+id);
+    var fichaNueva=document.getElementById(id);
+  }
+
+function expandePresion(f,c){
+  var temporal1;
+  var temporal2;
+  var temporal3;
+  var temporal4;
+  var temporal5;
+  var temporal6;
+  var temporal7;
+  var temporal8;
+  if(f>=1&&f<=7 &&c>=1&&c<=7){//recuadro sin problema
+    var fila=f-1;
+    var column=c-1;
+
+    temporal1=document.getElementById(fila+''+column);
+    temporal1.className="presion";
+     temporal2=document.getElementById((f-1)+''+c);
+     temporal2.className="presion";
+     temporal3=document.getElementById((f-1)+''+(c+1));
+     temporal3.className="presion";
+     temporal4=document.getElementById(f+''+(c-1));
+     temporal4.className="presion";
+     temporal5=document.getElementById(f+''+(c+1));
+     temporal5.className="presion";
+     temporal6=document.getElementById((f+1)+''+(c-1));
+     temporal6.className="presion";
+     temporal7=document.getElementById((f+1)+''+c);
+     temporal7.className="presion";
+     temporal8=document.getElementById((f+1)+''+(c+1));
+     temporal8.className="presion";
+
+
+  }else if(f==0&&c<=7){  //rectangulo 2
+    console.log("rectangulo2");
+    if(c==0){
+      temporal5=document.getElementById(f+''+(c+1));
+      temporal5.className="presion";
+      temporal7=document.getElementById((f+1)+''+c);
+      temporal7.className="presion";
+      temporal8=document.getElementById((f+1)+''+(c+1));
+      temporal8.className="presion";
+    }else{
+      console.log("Columna no es 0");
+      temporal4=document.getElementById(f+''+(c-1));
+      temporal4.className="presion";
+      temporal5=document.getElementById(f+''+(c+1));
+      temporal5.className="presion";
+      temporal6=document.getElementById((f+1)+''+(c-1));
+      temporal6.className="presion";
+      temporal7=document.getElementById((f+1)+''+c);
+      temporal7.className="presion";
+      temporal8=document.getElementById((f+1)+''+(c+1));
+      temporal8.className="presion";
+    }
+
+
+  }
+
+  if(c>=1&&f==8){  //recuadro  3
+
+      console.log("rectangulo3");
+    if (c==8) {
+
+      console.log("rectangulo3*");
+      temporal1=document.getElementById((f-1)+''+(c-1));
+      temporal1.className="presion";
+      temporal2=document.getElementById((f-1)+''+c);
+      temporal2.className="presion";
+      temporal4=document.getElementById(f+''+(c-1));
+      temporal4.className="presion";
+
+
+   }else{
+     temporal1=document.getElementById((f-1)+''+(c-1));
+     temporal1.className="presion";
+     temporal2=document.getElementById((f-1)+''+c);
+     temporal2.className="presion";
+     temporal3=document.getElementById((f-1)+''+(c+1));
+     temporal3.className="presion";
+     temporal4=document.getElementById(f+''+(c-1));
+     temporal4.className="presion";
+     temporal5=document.getElementById(f+''+(c+1));
+     temporal5.className="presion";
+
+   }
+  }else if(c==0&&f>=1){  //recuadro  4
+
+
+    if(f==8){
+      temporal2=document.getElementById((f-1)+''+c);
+      temporal2.className="presion";
+
+      temporal3=document.getElementById((f-1)+''+(c+1));
+      temporal3.className="presion";
+
+      temporal5=document.getElementById(f+''+(c+1));
+      temporal5.className="presion";
+    }else{
+
+        temporal2=document.getElementById((f-1)+''+c);
+        temporal2.className="presion";
+        temporal3=document.getElementById((f-1)+''+(c+1));
+        temporal3.className="presion";
+        temporal5=document.getElementById(f+''+(c+1));
+        temporal5.className="presion";
+        temporal7=document.getElementById((f+1)+''+c);
+        temporal7.className="presion";
+        temporal8=document.getElementById((f+1)+''+(c+1));
+        temporal8.className="presion";
+    }
+  }
+
+  else if(c==8&&f<=7){  //recuadro  5
+
+
+    if(f==0){
+      temporal4=document.getElementById(f+''+(c-1));
+      temporal4.className="presion";
+      temporal6=document.getElementById((f+1)+''+(c-1));
+      temporal6.className="presion";
+      temporal7=document.getElementById((f+1)+''+c);
+      temporal7.className="presion";
+
+    }else{
+        temporal1=document.getElementById((f-1)+''+(c-1));
+        temporal1.className="presion";
+       temporal2=document.getElementById((f-1)+''+c);
+       temporal2.className="presion";
+       temporal4=document.getElementById(f+''+(c-1));
+       temporal4.className="presion";
+       temporal6=document.getElementById((f+1)+''+(c-1));
+       temporal6.className="presion";
+       temporal7=document.getElementById((f+1)+''+c);
+       temporal7.className="presion";
+
+
+    }
+  }
+
+
+
+
+}
+
+function compara(tablero){
+  if(tablero>0&&tablero!='b')
+  return 1;
+else
+  return -1;
+}
+function revisaGanador(tablero){
+  var bombas;
+  var celdas=0;     //maximo 81
+  var te;
+  for (var i = 0; i < 9; i++) {
+    for (var j = 0; j < 9; j++) {
+      te=document.getElementById(i+''+j);
+      if(te.className=="presion"){
+          celdas++;
+      }
+    }
+  }
+  //81-10bombas
+  if(celdas==71){
+    alert("HAS GANADO");
+  }
+}
+function iniciamos(){
+  inicia=1;
+}
+class Tablero extends React.Component{
+
+
+   busca(){
+
+    const squares =this.state.tablero.slice();
+    var mina=0;
+    var t,band=0;
+    for (var i = 0; i < 9; i++) {
+      for (var j = 0; j < 9; j++) {
+
+        if(squares[i][j]=='b'){
+          band=0;
+          t=document.getElementById(i+''+j);
+            if(i>=1&&i<=7 &&j>=1&&j<=7){//recuadro sin problema
+              if(squares[i-1][j-1]>0){ //1
+                if (squares[i-1][j]>0) { //2
+                  if (squares[i-1][j+1]>0) { //3
+                    if (squares[i][j-1]>0) {   //4
+                      if (squares[i][j+1]>0) { //5
+                        if (squares[i+1][j-1]>0) { //6
+                          if (squares[i+1][j]>0) {   //7
+                            if (squares[i+1][j+1]>0) {//8
+                              band=1;     //cambio de la bombi
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }else if (i==0&&j<=7) {     //recuadro 2
+              if (i==0){
+                if (squares[i][j+1]>0) { //5
+                  if (squares[i+1][j]>0) {   //7
+                    if (squares[i+1][j+1]>0) {//8
+                      band=1;     //cambio de la bombi
+                    }
+                  }
+                }
+
+              }else{
+                if (squares[i][j+1]>0) { //5
+                  if (squares[i+1][j]>0) {   //7
+                    if (squares[i+1][j+1]>0) {//8
+                      if (squares[i][j-1]>0) {   //4
+                        if (squares[i+1][j-1]>0) { //6
+                          band=1;    //cambio de la bombi
+                        }
+                      }
+
+                    }
+                  }
+                }
+              }
+            }else if (i>=1&&j==8) {     //recuadro 3
+
+                if (j==8) {
+                  if(squares[i-1][j-1]>0){ //1
+                    if (squares[i-1][j]>0) { //2
+                      if (squares[i][j-1]>0) {   //4
+                          band=1;    //cambio de la bombi
+                      }
+                    }
+                  }
+
+                }else{
+                  if(squares[i-1][j-1]>0){ //1
+                    if (squares[i-1][j]>0) { //2
+                      if (squares[i][j-1]>0) {   //4
+
+                        if (squares[i-1][j+1]>0) { //3
+                          if (squares[i][j+1]>0) { //5
+                            band=1;   //cambio de la bombi
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+
+            }else if (i==0&&j>=1) {     //recuadro 4
+                if(i==8){
+                  if (squares[i-1][j]>0) { //2
+                    if (squares[i-1][j+1]>0) { //3
+                        if (squares[i][j+1]>0) { //5
+                          band=1;     //cambio de la bombi
+                        }
+                    }
+                  }
+                }else{
+                  if (squares[i-1][j]>0) { //2
+                    if (squares[i-1][j+1]>0) { //3
+                        if (squares[i][j+1]>0) { //5
+                          if (squares[i+1][j]>0) {   //7
+                            if (squares[i+1][j+1]>0) {//8
+                              band=1;     //cambio de la bombi
+                            }
+                          }
+
+                        }
+                    }
+                  }
+                }
+            }else if (i==8&&j<=7) {     //recuadro 5
+              if (i==0) {
+                  if (squares[i][j-1]>0) {   //4
+                    if (squares[i+1][j-1]>0) { //6
+                      if (squares[i+1][j]>0) {   //7
+                        band=1;    //cambio de la bombi
+                      }
+                    }
+                  }
+              }else{
+                if (squares[i][j-1]>0) {   //4
+                  if (squares[i+1][j-1]>0) { //6
+                    if (squares[i+1][j]>0) {   //7
+                      if(squares[i-1][j-1]>0){ //1
+                        if (squares[i-1][j]>0) { //2
+                          band=1;     //cambio de la bombi
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          if(band==1){
+            t.className="isla";
+            mina++;
+            if(mina==9){
+              alert("Ganaste");
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+
+
+
+  verificarIslas(f,c,tablerotemporal){     //las islas que se hacen al conocer las bombas
+    console.log(" L36:"+f+''+c);                    //reduciendo el numero de bombas
+     var resultado=-1;
+     if(f<0||f>8||c<0||c>8){
+       return -1;    //si no existe la celda o ya fue presionada, se regresa
+     }
+     console.log("*");
+
+
+    console.log("tablero temporal : fila"+f+"columna:"+c+"valor"+ tablerotemporal[f][c]);
+
+     var temporal=document.getElementById(f+''+c);
+     var temporal1;
+     var temporal2;
+     var temporal3;
+     var temporal4;
+     var temporal5;
+     var temporal6;
+     var temporal7;
+     var temporal8;
+     if(f>=1&&f<=7 &&c>=1&&c<=7){//recuadro sin problema
+       var fila=f-1;
+       var column=c-1;
+       console.log("L51"+fila+''+column);
+       temporal1=document.getElementById(fila+''+column);
+         console.log("recuadro sin problema L53"+temporal1);
+        if(temporal1.className=="presion"||tablerotemporal[f-1][c-1]=='b'){ //1
+          console.log("L55 "+f-1+''+c-1);
+          temporal2=document.getElementById((f-1)+''+c);
+          if(temporal2.className=="presion"||tablerotemporal[f-1][c]=='b'){// 2
+            console.log("L58 "+f-1+''+c);
+            temporal3=document.getElementById((f-1)+''+(c+1));
+            if(temporal3.className=="presion"||tablerotemporal[f-1][c+1]=='b'){// 3
+              console.log("L61 "+f-1+''+c+1);
+              temporal4=document.getElementById(f+''+(c-1));
+              if(temporal4.className=="presion"||tablerotemporal[f][c-1]=='b'){// 4
+                console.log("L64 "+f+''+c-1);
+                temporal5=document.getElementById(f+''+(c+1));
+                if(temporal5.className=="presion" ||tablerotemporal[f][c+1]=='b'){// 5
+                  console.log("L67 "+f+''+c+1);
+                  temporal6=document.getElementById((f+1)+''+(c-1));
+                  if(temporal6.className=="presion" ||tablerotemporal[f+1][c-1]=='b'){// 6
+                    console.log("L70 "+f+1+''+c-1);
+                    temporal7=document.getElementById((f+1)+''+c);
+                    if(temporal7.className=="presion"||tablerotemporal[f+1][c]=='b' ){// 7
+                      console.log("L73 "+f+1+''+c);
+                      temporal8=document.getElementById((f+1)+''+(c+1));
+                      if(temporal8.className=="presion"||tablerotemporal[f+1][c+1]=='b' ){// 8
+                        console.log("L76 "+f+1+''+c+1);
+                        console.log("llego sano:"+resultado);
+                        resultado=1;
+                        temporal.className="isla";
+
+                      }
+
+                    }
+
+                  }
+
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+     }else if(f==0&&c<=7){  //rectangulo 2
+       console.log("rectangulo2");
+       if(c==0){
+         temporal5=document.getElementById(f+''+(c+1));
+           console.log("L99 "+f+''+c+1);
+         if(temporal5.className=="presion" ||tablerotemporal[f][c+1]=='b'){// 5
+           temporal7=document.getElementById((f+1)+''+c);
+             console.log("L102 "+f+1+''+c);
+           if(temporal7.className=="presion" ||tablerotemporal[f+1][c]=='b'){// 7
+             temporal8=document.getElementById((f+1)+''+(c+1));
+             console.log("L105 "+f+1+''+c+1);
+             if(temporal8.className=="presion" ||tablerotemporal[f+1][c+1]=='b'){// 8
+               resultado=1;
+             }
+           }
+         }
+       }else{
+         console.log("Columna no es 0");
+         var columna=c-1;
+         var fila=f;
+         temporal4=document.getElementById(fila+''+columna);
+         console.log("L113 "+f+''+(c-1));
+         if(temporal4.className=="presion"||tablerotemporal[f][c-1]=='b'){// 4
+
+           console.log("*"); temporal5=document.getElementById(f+''+(c+1));
+           console.log("L117 "+f+''+(c+1));
+
+           if(temporal5.className=="presion" ||tablerotemporal[f][c+1]=='b'){// 5
+             temporal6=document.getElementById((f+1)+''+(c-1));
+             console.log("L121 "+f+1+''+c-1);   console.log("**");
+             if(temporal6.className=="presion" ||tablerotemporal[f+1][c-1]=='b'){// 6
+               temporal7=document.getElementById((f+1)+''+c);
+               console.log("L124 "+f+1+''+c); console.log("***");
+               if(temporal7.className=="presion" ||tablerotemporal[f+1][c]=='b'){// 7
+                 temporal8=document.getElementById((f+1)+''+(c+1));
+                 console.log("L127 "+f+1+''+c+1); console.log("**");
+                 if(temporal8.className=="presion" ||tablerotemporal[f+1][c+1]=='b'){// 8
+                   resultado=1;
+                 }
+               }
+             }
+           }
+         }
+       }
+
+
+     }
+
+     else if(c>=1&&f==8){  //recuadro  3
+
+         console.log("rectangulo3");
+       if (c==8) {
+         console.log("r3*");
+         temporal1=document.getElementById((f-1)+''+(c-1));
+
+           console.log("r3**");
+         console.log("L143 "+(f-1)+''+(c-1));
+          if(temporal1.className=="presion"||tablerotemporal[f-1][c-1]=='b'){ //1
+            temporal2=document.getElementById((f-1)+''+c);
+            console.log("L146 "+f-1+''+c);
+            if(temporal2.className=="presion"||tablerotemporal[f-1][c]=='b'){// 2
+              temporal4=document.getElementById(f+''+(c-1));
+              console.log("L149"+f+''+c-1);
+              if(temporal4.className=="presion"||tablerotemporal[f][c-1]=='b'){// 4
+                    resultado=1;
+               }
+          }
+        }
+      }else{
+        console.log("r3*");
+        temporal1=document.getElementById((f-1)+''+(c-1));
+          console.log("r3**");
+
+        console.log("L157 "+f-1+''+c-1);
+         if(temporal1.className=="presion"||tablerotemporal[f-1][c-1]=='b'){ //1
+           temporal2=document.getElementById((f-1)+''+c);
+             console.log("L160 "+f-1+''+c);
+           if(temporal2.className=="presion"||tablerotemporal[f-1][c]=='b'){// 2
+             temporal3=document.getElementById((f-1)+''+(c+1));
+               console.log("L163 "+f-1+''+c+1);
+             if(temporal3.className=="presion"||tablerotemporal[f-1][c+1]=='b'){// 3
+               temporal4=document.getElementById(f+''+(c-1));
+                 console.log("L166 "+f+''+c-1);
+               if(temporal4.className=="presion"||tablerotemporal[f][c-1]=='b'){// 4
+                 temporal5=document.getElementById(f+''+(c+1));
+                   console.log("L169 "+f+''+c+1);
+                 if(temporal5.className=="presion"||tablerotemporal[f][c+1]=='b'){// 5
+                     console.log("listo L172 "+f-1+''+c);
+                     resultado=1;
+                }
+              }
+            }
+          }
+        }
+      }
+     }
+     else if(c==0&&f>=1){  //recuadro  4
+
+         console.log("rectangul4");
+       if(f==8){
+         temporal2=document.getElementById((f-1)+''+c);
+         console.log(" L183 "+f-1+''+c);
+         if(temporal2.className=="presion"||tablerotemporal[f-1][c]=='b'){// 2
+           temporal3=document.getElementById((f-1)+''+(c+1));
+           console.log(" L186 "+f-1+''+c+1);
+           if(temporal3.className=="presion"||tablerotemporal[f-1][c+1]=='b'){// 3
+             temporal5=document.getElementById(f+''+(c+1));
+             console.log(" L189 "+f+''+c+1);
+             if(temporal5.className=="presion"||tablerotemporal[f][c+1]=='b'){// 5
+             console.log("listo L191 "+f-1+''+c);
+                 resultado=1;
+               }
+           }
+         }
+       }else{
+         console.log("R4*");
+         temporal2=document.getElementById((f-1)+''+c);
+         console.log(temporal2.className);
+         console.log(" L198 "+f-1+''+c);
+         if(temporal2.className=="presion"||tablerotemporal[f-1][c]=='b'){// 2
+           console.log("R4*");
+           temporal3=document.getElementById((f-1)+''+(c+1));
+           console.log(" L201 "+f-1+''+c+1);
+           if(temporal3.className=="presion"||tablerotemporal[f-1][c+1]=='b'){// 3
+             console.log("R4**");
+             temporal5=document.getElementById(f+''+(c+1));
+             console.log(" L204 "+f+''+c+1);
+             if(temporal5.className=="presion"||tablerotemporal[f][c+1]=='b'){// 5
+               console.log("R4**");
+                   temporal7=document.getElementById((f+1)+''+c);
+                   console.log(" L207 "+f+1+''+c);
+                   if(temporal7.className=="presion"||tablerotemporal[f+1][c]=='b'){// 7
+                     console.log("R4***");
+                     temporal8=document.getElementById((f+1)+''+(c+1));
+                     console.log(" L210 "+f+1+''+c+1);
+                     if(temporal8.className=="presion"||tablerotemporal[f+1][c+1]=='b'){// 8
+                       console.log("R4****");
+                       resultado=1;
+                       console.log("listo L213 "+(f+1)+''+(c+1));
+                     }
+                   }
+               }
+           }
+         }
+       }
+     }
+
+     else if(c==8&&f<=7){  //recuadro  5
+
+         console.log("rectangulo2");
+       if(f==0){
+         temporal4=document.getElementById(f+''+(c-1));
+         if(temporal4.className=="presion"||tablerotemporal[f][c-1]=='b'){// 4
+           temporal6=document.getElementById((f+1)+''+(c-1));
+           if(temporal6.className=="presion"||tablerotemporal[f+1][c-1]=='b'){// 6
+             temporal7=document.getElementById((f+1)+''+c);
+             if(temporal7.className=="presion"||tablerotemporal[f+1][c]=='b'){// 7
+                 resultado=1;;
+               }
+             }
+         }
+       }else{
+         temporal1=document.getElementById((f-1)+''+(c-1));
+          if(temporal1.className=="presion"||tablerotemporal[f-1][c-1]=='b'){ //1
+            temporal2=document.getElementById((f-1)+''+c);
+            if(temporal2.className=="presion"||tablerotemporal[f-1][c]=='b'){// 2
+              temporal4=document.getElementById(f+''+(c-1));
+              if(temporal4.className=="presion"||tablerotemporal[f][c-1]=='b'){// 4
+                temporal6=document.getElementById((f+1)+''+(c-1));
+                if(temporal6.className=="presion"||tablerotemporal[f+1][c-1]=='b'){// 6
+                  temporal7=document.getElementById((f+1)+''+c);
+                  if(temporal7.className=="presion"||tablerotemporal[f+1][c]=='b'){// 7
+                         resultado=1;
+                       }
+                   }
+                 }
+             }
+           }
+       }
+     }
+     if(resultado==1){
+       temporal.className="isla";
+        console.log("solo queda nadav:");
+         temporal.className="isla";
+         tablerotemporal[f][c]='E';
+         this.setState(prevState=>{
+           return{
+            tablero: tablerotemporal,
+            numerominas:prevState.numerominas-1,
+           }
+         });
+     }
+
+
+     return resultado;
+  }
+
+
+  //funciones que ya no se deben de tocar creo ya están
+
+
+  cambiaNumeroAmenazas(f,c,clase,bombas){
+
+   const tablerotemporal=this.state.tablero.slice();
+   var fichaNueva=document.getElementById(f+''+c);
+   fichaNueva.className=clase;
+   tablerotemporal[f][c]=bombas;
+   this.setState(prevState=>{
+     return{
+        tablero:  tablerotemporal,
+        minas: this.state.minas,
+     }
+
+
+     //llamar a funcion para que rellene de bombas
+   });
+
+ }
+
+  encuentraMinas(f,c){///esyta se esta modifica
+
+
+    if(f<0||f>8||c<0||c>8){
+      return -1;    //si no existe la celda o ya fue presionada, se regresa
+    }
+    var buscamina=document.getElementById(f+''+c);
+
+    const tablerotemporal=this.state.tablero.slice();
+    if(buscamina==undefined||buscamina.className=="presion")
+      return -1;
+
+    console.log("entramos a tablero");
+    var contabum=0;
+
+    if(tablerotemporal[f][c]=='b')
+      return -2;
+
+    buscamina.className="presion";
+
+    if(tablerotemporal[f][c]!='b'){
+        if(f-1>=0){
+
+          if(tablerotemporal[f-1][c]=='b'){
+
+            console.log("L625 encuentraMinas");
+            this.verificarIslas(f-1,c,tablerotemporal);
+            contabum++;
+          }
+
+          if(c-1>=0){
+            if(tablerotemporal[f-1][c-1]=='b'){
+              console.log("L632 encuentraMinas");
+              this.verificarIslas(f-1,c-1,tablerotemporal);
+              contabum++;
+            }
+          }
+          if(c+1<=8){
+            if(tablerotemporal[f-1][c+1]=='b'){
+                        console.log("L639 encuentraMinas");
+              this.verificarIslas(f-1,c+1,tablerotemporal);
+              contabum++;
+
+            }
+          }
+
+
+        }
+
+      if(c-1>=0){
+        if(tablerotemporal[f][c-1]=='b'){
+                    console.log("L651 encuentraMinas");
+          this.verificarIslas(f,c-1,tablerotemporal);
+          contabum++;
+
+        }
+      }
+      if(c+1<=8){
+        if(tablerotemporal[f][c+1]=='b'){
+                    console.log("L659 encuentraMinas");
+          this.verificarIslas(f,c+1,tablerotemporal);
+          contabum++;
+
+        }
+      }
+
+      if(f+1<=8){
+        if(c-1>=0){
+          if(tablerotemporal[f+1][c-1]=='b'){
+                      console.log("L669 encuentraMinas");
+            this.verificarIslas(f+1,c-1,tablerotemporal);
+            contabum++;
+
+          }
+        }
+
+        if(tablerotemporal[f+1][c]=='b'){
+                    console.log("L677 encuentraMinas");
+          this.verificarIslas(f+1,c,tablerotemporal);
+          contabum++;
+
+        }
+        if(c+1<=8){
+          if(tablerotemporal[f+1][c+1]=='b'){
+                      console.log("L684 encuentraMinas");
+            this.verificarIslas(f+1,c+1,tablerotemporal);
+            contabum++;
+
+          }
+        }
+
+      }
+
+
+      if(!contabum){
+        //no hay bombas en vecinos*/}1
+        // marcar presion en todos los cuadritos*/}
+          expandePresion(f,c);
+          cambiaColor(f+''+c,"presion");
+
+
+        return 0;
+
+      }else{
+        //vecinos con bombas
+        if (contabum == 1)
+              buscamina.className="presionba";
+        if (contabum == 2)
+          buscamina.className="presionbv";
+          /*this.cambiaNumeroAmenazas(f,c,"presionbv", contabum);*/
+        if (contabum == 3)
+          buscamina.className="presionbr";
+        /*  this.cambiaNumeroAmenazas(f,c,"presionbr", contabum);*/
+        if (contabum >= 4)
+          buscamina.className="presionbm";
+        /*  this.cambiaNumeroAmenazas(f,c,"presionbm", contabum);*/
+              
+        return contabum;
+      }
+    }else
+       return -2;   //ya se murió
+
+  }
+  nada(){
+   console.log("nada2");
+
+
+  }
+  nadirri(){
+   console.log("nada");
+   this.state={
+
+     minas: false,
+     //llamar a funcion para que rellene de bombas
+   };
+  }
+
+  rellenaMatriz(){
+
+   const squares1 = this.state.tablero.slice();
+   var i=0,j=0,iprima=0;
+   var rand1=0,rand2=0,tempo;
+   const parejas=Array(9).fill(null);
+     while (i<10) {
+       rand1=Math.floor(Math.random()*9);
+       rand2=Math.floor(Math.random()*9);
+       console.log(rand1+"  _  "+rand2);
+       squares1[rand1][rand2]='b';
+       tempo=rand1+''+rand2;
+       iprima=parejas.includes(tempo);
+       if(iprima==false){
+         parejas[i]=tempo;
+         i++
+       }
+     }
+  }
+
+  muestra(f,c){
+     const squares =this.state.tablero.slice();
+     if(squares[f][c]!='b'&&squares[f][c]>0)
+     return squares[f][c];
+     else {
+       return ' ';
+     }
+  }
+//    ----------------------- funciones para reconocer botones
+constructor(props){
+	super(props);
+	this.state={
+
+    tablero:  Array.from(Array(9),()=> Array(9).fill(0)),
+    minas: true,
+    numerominas:10,
+    //llamar a funcion para que rellene de bombas
+	};
+
+
+     this.rellenaMatriz();
+}
+
+
+
+
+handleClick(c,f,id){
+  if(inicia==1){
+
+
+ const squares =this.state.tablero.slice();
+
+		    console.log('Se hizo click');
+		    //squares[f][c]=f;
+		    console.log("L491:"+c+" : "+f);
+        if(this.encuentraMinas(f,c)==-2){
+          console.log("fin de juego");
+
+          for (var i = 0; i < 9; i++) {
+            console.log("i:"+i);
+            for (var j = 0; j < 9; j++) {
+              console.log("j:"+j);
+              var tempi=document.getElementById(i+''+j);
+              //colorea las demas fichas que tengan bombas
+              if(squares[i][j]=='b'&&tempi.className!="isla"){
+                  tempi.className="finjuego";
+              }
+            }
+          }
+
+          alert("HAS PERDIDO! :( ");
+          inicia=0;
+        }else{
+          console.log("next");
+          revisaGanador(squares);
+
+        }
+
+    }
+ }
+
+
+//      fin de esas funciones
+	render(){
+
+
+		var Estilo={
+			widht : "100%",
+			textAling: "center",
+			backgroundColor:"black",
+
+			paddingBottom:2,
+			fontFamily:"sans-serif",
+			color:"#999",
+			boderRadius:5
+		};
+
+		var Butonsito={
+			widht : "8%",
+			height: "8%"
+		};
+
+		var Est={
+				widht : "100%",
+				textAling: "center",
+				backgroundColor:"#a3e4d7",
+				padding:20,
+				paddingBottom:15,
+				fontFamily:"sans-serif",
+				color:"#999",
+				boderRadius:10
+		};
+
+		return(
+			<div className="Estilo">
+
+        <div style={Estilo}>
+  				<button className={"sinpresion"} id={'00'} onClick={() => this.handleClick(0,0,'00')}>
+            <div>
+            { this.muestra(0,0)}
+            </div>
+          </button>
+  				<button className={"sinpresion"} id={'01'} onClick={() => this.handleClick(1,0,'01')}>
+            { this.muestra(0,1)}
+          </button>
+  				<button className={"sinpresion"} id={'02'} onClick={() => this.handleClick(2,0,'02')}>
+            {this.muestra(0,2)}</button>
+  				<button className={"sinpresion"} id={'03'} onClick={() => this.handleClick(3,0,'03')}>
+            { this.muestra(0,3)}</button>
+  				<button className={"sinpresion"} id={'04'} onClick={() => this.handleClick(4,0,'04')}>
+            { this.muestra(0,4)}</button>
+  				<button className={"sinpresion"} id={'05'} onClick={() => this.handleClick(5,0,'05')}>
+            { this.muestra(0,5)}</button>
+  				<button className={"sinpresion"} id={'06'} onClick={() => this.handleClick(6,0,'06')}>
+            { this.muestra(0,6)}</button>
+  				<button className={"sinpresion"} id={'07'} onClick={() => this.handleClick(7,0,'07')}>
+            { this.muestra(0,7)}</button>
+  				<button className={"sinpresion"} id={'08'} onClick={() => this.handleClick(8,0,'08')}>
+            { this.muestra(0,8)}</button>
+  			</div>
+
+          <div style={Estilo}>
+          <button className={"sinpresion"} id={'10'} onClick={() => this.handleClick(0,1,'10')}> {this.muestra(1,0)}</button>
+            <button className={"sinpresion"} id={'11'} onClick={() => this.handleClick(1,1,'11')}>{this.muestra(1,1)}</button>
+            <button className={"sinpresion"} id={'12'} onClick={() => this.handleClick(2,1,'12')}>{this.muestra(1,2)}</button>
+            <button className={"sinpresion"} id={'13'} onClick={() => this.handleClick(3,1,'13')}>{this.muestra(1,3)}</button>
+            <button className={"sinpresion"} id={'14'} onClick={() => this.handleClick(4,1,'14')}>{this.muestra(1,4)}</button>
+            <button className={"sinpresion"} id={'15'} onClick={() => this.handleClick(5,1,'15')}>{this.muestra(1,5)}</button>
+            <button className={"sinpresion"} id={'16'} onClick={() => this.handleClick(6,1,'16')}>{this.muestra(1,6)}</button>
+            <button className={"sinpresion"} id={'17'} onClick={() => this.handleClick(7,1,'17')}>{this.muestra(1,7)}</button>
+            <button className={"sinpresion"} id={'18'} onClick={() => this.handleClick(8,1,'18')}>{this.muestra(1,8)}</button>
+          </div>
+
+            <div style={Estilo}>
+              <button className={"sinpresion"} id={'20'} onClick={() => this.handleClick(0,2,'20')}>{this.muestra(2,0)}</button>
+              <button className={"sinpresion"} id={'21'} onClick={() => this.handleClick(1,2,'21')}>{this.muestra(2,1)}</button>
+              <button className={"sinpresion"} id={'22'} onClick={() => this.handleClick(2,2,'22')}>{this.muestra(2,2)}</button>
+              <button className={"sinpresion"} id={'23'} onClick={() => this.handleClick(3,2,'23')}>{this.muestra(2,3)}</button>
+              <button className={"sinpresion"} id={'24'} onClick={() => this.handleClick(4,2,'24')}>{this.muestra(2,4)}</button>
+              <button className={"sinpresion"} id={'25'} onClick={() => this.handleClick(5,2,'25')}>{this.muestra(2,5)}</button>
+              <button className={"sinpresion"} id={'26'} onClick={() => this.handleClick(6,2,'26')}>{this.muestra(2,6)}</button>
+              <button className={"sinpresion"} id={'27'} onClick={() => this.handleClick(7,2,'27')}>{this.muestra(2,7)}</button>
+              <button className={"sinpresion"} id={'28'} onClick={() => this.handleClick(8,2,'28')}>{this.muestra(2,8)}</button>
+            </div>
+
+            <div style={Estilo}>
+              <button className={"sinpresion"} id={'30'} onClick={() => this.handleClick(0,3,'30')}>{this.muestra(3,0)}</button>
+              <button className={"sinpresion"} id={'31'} onClick={() => this.handleClick(1,3,'31')}>{this.muestra(3,1)}</button>
+              <button className={"sinpresion"} id={'32'} onClick={() => this.handleClick(2,3,'32')}>{this.muestra(3,2)}</button>
+              <button className={"sinpresion"} id={'33'} onClick={() => this.handleClick(3,3,'33')}>{this.muestra(3,3)}</button>
+              <button className={"sinpresion"} id={'34'} onClick={() => this.handleClick(4,3,'34')}>{this.muestra(3,4)}</button>
+              <button className={"sinpresion"} id={'35'} onClick={() => this.handleClick(5,3,'35')}>{this.muestra(3,5)}</button>
+              <button className={"sinpresion"} id={'36'} onClick={() => this.handleClick(6,3,'36')}>{this.muestra(3,6)}</button>
+              <button className={"sinpresion"} id={'37'} onClick={() => this.handleClick(7,3,'37')}>{this.muestra(3,7)}</button>
+              <button className={"sinpresion"} id={'38'} onClick={() => this.handleClick(8,3,'38')}>{this.muestra(3,8)}</button>
+            </div>
+
+            <div style={Estilo}>
+              <button className={"sinpresion"} id={'40'} onClick={() => this.handleClick(0,4,'40')}>{this.muestra(4,0)}</button>
+              <button className={"sinpresion"} id={'41'} onClick={() => this.handleClick(1,4,'41')}>{this.muestra(4,1)}</button>
+              <button className={"sinpresion"} id={'42'} onClick={() => this.handleClick(2,4,'42')}>{this.muestra(4,2)}</button>
+              <button className={"sinpresion"} id={'43'} onClick={() => this.handleClick(3,4,'43')}>{this.muestra(4,3)}</button>
+              <button className={"sinpresion"} id={'44'} onClick={() => this.handleClick(4,4,'44')}>{this.muestra(4,4)}</button>
+              <button className={"sinpresion"} id={'45'} onClick={() => this.handleClick(5,4,'45')}>{this.muestra(4,5)}</button>
+              <button className={"sinpresion"} id={'46'} onClick={() => this.handleClick(6,4,'46')}>{this.muestra(4,6)}</button>
+              <button className={"sinpresion"} id={'47'} onClick={() => this.handleClick(7,4,'47')}>{this.muestra(4,7)}</button>
+              <button className={"sinpresion"} id={'48'} onClick={() => this.handleClick(8,4,'48')}>{this.muestra(4,8)}</button>
+            </div>
+
+            <div style={Estilo}>
+              <button className={"sinpresion"} id={'50'} onClick={() => this.handleClick(0,5,'50')}>{this.muestra(5,0)}</button>
+              <button className={"sinpresion"} id={'51'} onClick={() => this.handleClick(1,5,'51')}>{this.muestra(5,1)}</button>
+              <button className={"sinpresion"} id={'52'} onClick={() => this.handleClick(2,5,'52')}>{this.muestra(5,2)}</button>
+              <button className={"sinpresion"} id={'53'} onClick={() => this.handleClick(3,5,'53')}>{this.muestra(5,3)}</button>
+              <button className={"sinpresion"} id={'54'} onClick={() => this.handleClick(4,5,'54')}>{this.muestra(5,4)}</button>
+              <button className={"sinpresion"} id={'55'} onClick={() => this.handleClick(5,5,'55')}>{this.muestra(5,5)}</button>
+              <button className={"sinpresion"} id={'56'} onClick={() => this.handleClick(6,5,'56')}>{this.muestra(5,6)}</button>
+              <button className={"sinpresion"} id={'57'} onClick={() => this.handleClick(7,5,'57')}>{this.muestra(5,7)}</button>
+              <button className={"sinpresion"} id={'58'} onClick={() => this.handleClick(8,5,'58')}>{this.muestra(5,8)}</button>
+            </div>
+
+            <div style={Estilo}>
+              <button className={"sinpresion"} id={'60'} onClick={() => this.handleClick(0,6,'60')}>{this.muestra(6,0)}</button>
+              <button className={"sinpresion"} id={'61'} onClick={() => this.handleClick(1,6,'61')}>{this.muestra(6,1)}</button>
+              <button className={"sinpresion"} id={'62'} onClick={() => this.handleClick(2,6,'62')}>{this.muestra(6,2)}</button>
+              <button className={"sinpresion"} id={'63'} onClick={() => this.handleClick(3,6,'63')}>{this.muestra(6,3)}</button>
+              <button className={"sinpresion"} id={'64'} onClick={() => this.handleClick(4,6,'64')}>{this.muestra(6,4)}</button>
+              <button className={"sinpresion"} id={'65'} onClick={() => this.handleClick(5,6,'65')}>{this.muestra(6,5)}</button>
+              <button className={"sinpresion"} id={'66'} onClick={() => this.handleClick(6,6,'66')}>{this.muestra(6,6)}</button>
+              <button className={"sinpresion"} id={'67'} onClick={() => this.handleClick(7,6,'67')}>{this.muestra(6,7)}</button>
+              <button className={"sinpresion"} id={'68'} onClick={() => this.handleClick(8,6,'68')}>{this.muestra(6,8)}</button>
+            </div>
+
+            <div style={Estilo}>
+              <button className={"sinpresion"} id={'70'} onClick={() => this.handleClick(0,7,'70')}>{this.muestra(7,0)}</button>
+              <button className={"sinpresion"} id={'71'} onClick={() => this.handleClick(1,7,'71')}>{this.muestra(7,1)}</button>
+              <button className={"sinpresion"} id={'72'} onClick={() => this.handleClick(2,7,'72')}>{this.muestra(7,2)}</button>
+              <button className={"sinpresion"} id={'73'} onClick={() => this.handleClick(3,7,'73')}>{this.muestra(7,3)}</button>
+              <button className={"sinpresion"} id={'74'} onClick={() => this.handleClick(4,7,'74')}>{this.muestra(7,4)}</button>
+              <button className={"sinpresion"} id={'75'} onClick={() => this.handleClick(5,7,'75')}>{this.muestra(7,5)}</button>
+              <button className={"sinpresion"} id={'76'} onClick={() => this.handleClick(6,7,'76')}>{this.muestra(7,6)}</button>
+              <button className={"sinpresion"} id={'77'} onClick={() => this.handleClick(7,7,'77')}>{this.muestra(7,7)}</button>
+              <button className={"sinpresion"} id={'78'} onClick={() => this.handleClick(8,7,'78')}>{this.muestra(7,8)}</button>
+            </div>
+
+            <div style={Estilo}>
+              <button className={"sinpresion"} id={'80'} onClick={() => this.handleClick(0,8,'80')}>{this.muestra(8,0)}</button>
+              <button className={"sinpresion"} id={'81'} onClick={() => this.handleClick(1,8,'81')}>{this.muestra(8,1)}</button>
+              <button className={"sinpresion"} id={'82'} onClick={() => this.handleClick(2,8,'82')}>{this.muestra(8,2)}</button>
+              <button className={"sinpresion"} id={'83'} onClick={() => this.handleClick(3,8,'83')}>{this.muestra(8,3)}</button>
+              <button className={"sinpresion"} id={'84'} onClick={() => this.handleClick(4,8,'84')}>{this.muestra(8,4)}</button>
+              <button className={"sinpresion"} id={'85'} onClick={() => this.handleClick(5,8,'85')}>{this.muestra(8,5)}</button>
+              <button className={"sinpresion"} id={'86'} onClick={() => this.handleClick(6,8,'86')}>{this.muestra(8,6)}</button>
+              <button className={"sinpresion"} id={'87'} onClick={() => this.handleClick(7,8,'87')}>{this.muestra(8,7)}</button>
+              <button className={"sinpresion"} id={'88'} onClick={() => this.handleClick(8,8,'88')}>{this.muestra(8,8)}</button>
+            </div>
+
+			<div style={Estilo} >
+
+          <div className="minas">
+          </div>
+        </div>
+
+      </div>
+
+		);
+	}
+}
+
+class CuentaLuz extends React.Component{
+constructor(props,context){
+	super(props,context);
+		this.state={
+			minutos:5,
+			segundos:0,
+			extra:'0',
+      seguir:1,
+
+		};
+		this.timerTick=this.timerTick.bind(this);
+	}
+	timerTick(){
+    if(inicia==1){
+      if (this.state.segundos==0){
+        if(this.state.minutos-1>0){
+          this.setState({minutos:this.state.minutos-1})
+          this.setState({segundos:59})
+        }
+
+  		}
+  		if (this.state.segundos==0&&this.state.minutos==0){
+        alert("Se acabo el tiempo");
+
+  			this.setState({seguir:1})
+  		}
+
+  		if (this.state.segundos!=60&&this.state.seguir==1){
+        if (this.state.segundos-1>=0)
+  			this.setState({segundos:this.state.segundos-1})
+
+  		}
+    }
+
+
+	}
+
+	componentDidMount(){
+		setInterval(this.timerTick,1000);
+	}
+	render(){
+		return (
+    <div className="contenedor" >
+      <div className="contiene2">
+        <h1>BUSCAMINAS</h1>
+      </div>
+
+      <div className="contiene1">
+         <h3>tiempo restante: {this.state.minutos>9?this.state.minutos:this.state.extra + this.state.minutos}:{ this.state.segundos<=9? this.state.extra+this.state.segundos:this.state.segundos}</h3>
+      </div>
+
+      <div className="contiene1">
+        <button className="boton" onClick={() => iniciamos()} >INICIAR </button>
+      </div>
+    </div>
+			);
+	}
+}
+
+
+
+class CuentaLuzDisplay extends React.Component{
+	render(){
+	var Estilo={
+			widht : 250,
+			textAling: "center",
+			backgroundColor:"black",
+			padding:40,
+			fontFamily:"monaco",
+			color:"red",
+			boderRadius:10
+		};
+		return(
+			<div style={Estilo}>
+				<CuentaLuz/>
+        <Tablero/>
+			</div>
+		);
+	}
+}
+
+
+
+ReactDOM.render(
+	<CuentaLuzDisplay/>,destination
+);
+
+  </script>
+
+</body>
+
+</html>
