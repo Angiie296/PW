@@ -12,7 +12,7 @@
 <body>
 <div id="container"></div>
   <script type="text/babel">
-  alert("\nJUEGO DE BUSCAMINAS.\nALDAZ CONTRERAS DANIELA.\n GARCIA GARCIA ANDREA CATALINA.\n602-A\n\n");
+ /* alert("\nJUEGO DE BUSCAMINAS.\nALDAZ CONTRERAS DANIELA.\n GARCIA GARCIA ANDREA CATALINA.\n602-A\n\n");*/
   var tablas= Array(9).fill(null);
   var destination=document.querySelector("#container");
   var inicia=0;
@@ -31,49 +31,35 @@ function expandePresion(f,c){
   var temporal6;
   var temporal7;
   var temporal8;
+
+
   if(f>=1&&f<=7 &&c>=1&&c<=7){//recuadro sin problema
     var fila=f-1;
     var column=c-1;
 
-    temporal1=document.getElementById(fila+''+column);
-    temporal1.className="presion";
-     temporal2=document.getElementById((f-1)+''+c);
-     temporal2.className="presion";
-     temporal3=document.getElementById((f-1)+''+(c+1));
-     temporal3.className="presion";
-     temporal4=document.getElementById(f+''+(c-1));
-     temporal4.className="presion";
-     temporal5=document.getElementById(f+''+(c+1));
-     temporal5.className="presion";
-     temporal6=document.getElementById((f+1)+''+(c-1));
-     temporal6.className="presion";
-     temporal7=document.getElementById((f+1)+''+c);
-     temporal7.className="presion";
-     temporal8=document.getElementById((f+1)+''+(c+1));
-     temporal8.className="presion";
+    temporal1=document.getElementById(fila+''+column);    temporal1.className="presion";
+     temporal2=document.getElementById((f-1)+''+c);     temporal2.className="presion";
+     temporal3=document.getElementById((f-1)+''+(c+1));     temporal3.className="presion";
+     temporal4=document.getElementById(f+''+(c-1));     temporal4.className="presion";
+     temporal5=document.getElementById(f+''+(c+1));     temporal5.className="presion";
+     temporal6=document.getElementById((f+1)+''+(c-1));      temporal6.className="presion";
+     temporal7=document.getElementById((f+1)+''+c);     temporal7.className="presion";
+     temporal8=document.getElementById((f+1)+''+(c+1));     temporal8.className="presion";
 
 
   }else if(f==0&&c<=7){  //rectangulo 2
     console.log("rectangulo2");
     if(c==0){
-      temporal5=document.getElementById(f+''+(c+1));
-      temporal5.className="presion";
-      temporal7=document.getElementById((f+1)+''+c);
-      temporal7.className="presion";
-      temporal8=document.getElementById((f+1)+''+(c+1));
-      temporal8.className="presion";
+      temporal5=document.getElementById(f+''+(c+1));      temporal5.className="presion";
+      temporal7=document.getElementById((f+1)+''+c);      temporal7.className="presion";
+      temporal8=document.getElementById((f+1)+''+(c+1));      temporal8.className="presion";
     }else{
       console.log("Columna no es 0");
-      temporal4=document.getElementById(f+''+(c-1));
-      temporal4.className="presion";
-      temporal5=document.getElementById(f+''+(c+1));
-      temporal5.className="presion";
-      temporal6=document.getElementById((f+1)+''+(c-1));
-      temporal6.className="presion";
-      temporal7=document.getElementById((f+1)+''+c);
-      temporal7.className="presion";
-      temporal8=document.getElementById((f+1)+''+(c+1));
-      temporal8.className="presion";
+      temporal4=document.getElementById(f+''+(c-1));      temporal4.className="presion";
+      temporal5=document.getElementById(f+''+(c+1));      temporal5.className="presion";
+      temporal6=document.getElementById((f+1)+''+(c-1));      temporal6.className="presion";
+      temporal7=document.getElementById((f+1)+''+c);      temporal7.className="presion";
+      temporal8=document.getElementById((f+1)+''+(c+1));      temporal8.className="presion";
     }
 
 
@@ -84,52 +70,31 @@ function expandePresion(f,c){
       console.log("rectangulo3");
     if (c==8) {
 
-      console.log("rectangulo3*");
-      temporal1=document.getElementById((f-1)+''+(c-1));
-      temporal1.className="presion";
-      temporal2=document.getElementById((f-1)+''+c);
-      temporal2.className="presion";
-      temporal4=document.getElementById(f+''+(c-1));
+      console.log("rectangulo3*");      temporal1=document.getElementById((f-1)+''+(c-1));
+      temporal1.className="presion";      temporal2=document.getElementById((f-1)+''+c);
+      temporal2.className="presion";      temporal4=document.getElementById(f+''+(c-1));
       temporal4.className="presion";
 
-
    }else{
-     temporal1=document.getElementById((f-1)+''+(c-1));
-     temporal1.className="presion";
-     temporal2=document.getElementById((f-1)+''+c);
-     temporal2.className="presion";
-     temporal3=document.getElementById((f-1)+''+(c+1));
-     temporal3.className="presion";
-     temporal4=document.getElementById(f+''+(c-1));
-     temporal4.className="presion";
-     temporal5=document.getElementById(f+''+(c+1));
-     temporal5.className="presion";
-
+     temporal1=document.getElementById((f-1)+''+(c-1));     temporal1.className="presion";
+     temporal2=document.getElementById((f-1)+''+c);     temporal2.className="presion";
+     temporal3=document.getElementById((f-1)+''+(c+1));     temporal3.className="presion";
+     temporal4=document.getElementById(f+''+(c-1));     temporal4.className="presion";
+     temporal5=document.getElementById(f+''+(c+1));     temporal5.className="presion";
    }
   }else if(c==0&&f>=1){  //recuadro  4
 
-
     if(f==8){
-      temporal2=document.getElementById((f-1)+''+c);
-      temporal2.className="presion";
-
-      temporal3=document.getElementById((f-1)+''+(c+1));
-      temporal3.className="presion";
-
-      temporal5=document.getElementById(f+''+(c+1));
-      temporal5.className="presion";
+      temporal2=document.getElementById((f-1)+''+c);      temporal2.className="presion";
+      temporal3=document.getElementById((f-1)+''+(c+1));      temporal3.className="presion";
+      temporal5=document.getElementById(f+''+(c+1));      temporal5.className="presion";
     }else{
 
-        temporal2=document.getElementById((f-1)+''+c);
-        temporal2.className="presion";
-        temporal3=document.getElementById((f-1)+''+(c+1));
-        temporal3.className="presion";
-        temporal5=document.getElementById(f+''+(c+1));
-        temporal5.className="presion";
-        temporal7=document.getElementById((f+1)+''+c);
-        temporal7.className="presion";
-        temporal8=document.getElementById((f+1)+''+(c+1));
-        temporal8.className="presion";
+        temporal2=document.getElementById((f-1)+''+c);        temporal2.className="presion";
+        temporal3=document.getElementById((f-1)+''+(c+1));        temporal3.className="presion";
+        temporal5=document.getElementById(f+''+(c+1));        temporal5.className="presion";
+        temporal7=document.getElementById((f+1)+''+c);        temporal7.className="presion";
+        temporal8=document.getElementById((f+1)+''+(c+1));        temporal8.className="presion";
     }
   }
 
@@ -137,26 +102,16 @@ function expandePresion(f,c){
 
 
     if(f==0){
-      temporal4=document.getElementById(f+''+(c-1));
-      temporal4.className="presion";
-      temporal6=document.getElementById((f+1)+''+(c-1));
-      temporal6.className="presion";
-      temporal7=document.getElementById((f+1)+''+c);
-      temporal7.className="presion";
+      temporal4=document.getElementById(f+''+(c-1));      temporal4.className="presion";
+      temporal6=document.getElementById((f+1)+''+(c-1));      temporal6.className="presion";
+      temporal7=document.getElementById((f+1)+''+c);      temporal7.className="presion";
 
     }else{
-        temporal1=document.getElementById((f-1)+''+(c-1));
-        temporal1.className="presion";
-       temporal2=document.getElementById((f-1)+''+c);
-       temporal2.className="presion";
-       temporal4=document.getElementById(f+''+(c-1));
-       temporal4.className="presion";
-       temporal6=document.getElementById((f+1)+''+(c-1));
-       temporal6.className="presion";
-       temporal7=document.getElementById((f+1)+''+c);
-       temporal7.className="presion";
-
-
+        temporal1=document.getElementById((f-1)+''+(c-1));        temporal1.className="presion";
+       temporal2=document.getElementById((f-1)+''+c);       temporal2.className="presion";
+       temporal4=document.getElementById(f+''+(c-1));       temporal4.className="presion";
+       temporal6=document.getElementById((f+1)+''+(c-1));       temporal6.className="presion";
+       temporal7=document.getElementById((f+1)+''+c);       temporal7.className="presion";
     }
   }
 
@@ -175,8 +130,9 @@ function revisaGanador(tablero){
   var bombas;
   var celdas=0;     //maximo 81
   var te;
-  for (var i = 0; i < 9; i++) {
-    for (var j = 0; j < 9; j++) {
+  for (var i=0; i < 9; i++) 
+  {
+    for (var j=0; j < 9; j++) {
       te=document.getElementById(i+''+j);
       if(te.className=="presion"){
           celdas++;
@@ -623,35 +579,27 @@ class Tablero extends React.Component{
 
  }
 
-  encuentraMinas(f,c){///esyta se esta modifica
-
-
-    if(f<0||f>8||c<0||c>8){
+encuentraMinas(f,c){///esyta se esta modifica
+   if(f<0||f>8||c<0||c>8){
       return -1;    //si no existe la celda o ya fue presionada, se regresa
     }
-    var buscamina=document.getElementById(f+''+c);
 
-    const tablerotemporal=this.state.tablero.slice();
-    if(buscamina==undefined||buscamina.className=="presion")
-      return -1;
-
-    console.log("entramos a tablero");
-    var contabum=0;
-
-    if(tablerotemporal[f][c]=='b')
-      return -2;
-
-    buscamina.className="presion";
-
+  var buscamina=document.getElementById(f+''+c);
+  const tablerotemporal=this.state.tablero.slice();
+  if(buscamina==undefined||buscamina.className=="presion")
+    return -1;
+  console.log("entramos a tablero");
+  var contabum=0;
+  if(tablerotemporal[f][c]=='b')
+    return -2;
+  buscamina.className="presion";
     if(tablerotemporal[f][c]!='b'){
-        if(f-1>=0){
-
-          if(tablerotemporal[f-1][c]=='b'){
-
-            console.log("L625 encuentraMinas");
-            this.verificarIslas(f-1,c,tablerotemporal);
-            contabum++;
-          }
+      if(f-1>=0){
+        if(tablerotemporal[f-1][c]=='b'){
+        console.log("L625 encuentraMinas arriba??");
+        this.verificarIslas(f-1,c,tablerotemporal);
+        contabum++;
+      }
 
           if(c-1>=0){
             if(tablerotemporal[f-1][c-1]=='b'){
@@ -720,6 +668,66 @@ class Tablero extends React.Component{
       if(!contabum){
         //no hay bombas en vecinos*/}1
         // marcar presion en todos los cuadritos*/}
+     if(f>=1&&f<=7 &&c>=1&&c<=7){
+            this.encuentraMinas(f-1,c);
+            this.encuentraMinas(f-1,c+1);
+            this.encuentraMinas(f,c-1);
+            this.encuentraMinas(f,c+1);
+            this.encuentraMinas(f+1,c-1);
+            this.encuentraMinas(f+1,c);
+            this.encuentraMinas(f+1,c+1);
+          }else if ((f==0&&c<=7)) {
+            if(c==0){
+              this.encuentraMinas(f,c+1);
+              this.encuentraMinas(f+1,c);
+              this.encuentraMinas(f+1,c+1);
+              this.encuentraMinas(f,c);
+            }else{
+              this.encuentraMinas(f,c-1);
+              this.encuentraMinas(f,c+1);
+              this.encuentraMinas(f+1,c-1);
+              this.encuentraMinas(f+1,c);
+              this.encuentraMinas(f+1,c+1);
+            }
+          }else if ((c>=1&&f==8)) {
+              if (c==8) {
+                this.encuentraMinas(f-1,c-1);
+                this.encuentraMinas(f-1,c);
+                this.encuentraMinas(f,c-1);
+              }else {
+                this.encuentraMinas(f-1,c-1);
+                this.encuentraMinas(f-1,c);
+                this.encuentraMinas(f-1,c+1);
+                this.encuentraMinas(f,c-1);
+                this.encuentraMinas(f,c+1);
+              }
+            }else if (c==0&&f>=1) {
+              if(f==8){
+                this.encuentraMinas(f-1,c);
+                this.encuentraMinas(f-1,c+1);
+                this.encuentraMinas(f,c+1);
+              }else {
+                this.encuentraMinas(f-1,c);
+                this.encuentraMinas(f-1,c+1);
+                this.encuentraMinas(f,c+1);
+                this.encuentraMinas(f+1,c);
+                this.encuentraMinas(f+1,c+1);
+              }
+            }else if (c==8&&f<=7) {
+              if (f==0) {
+                this.encuentraMinas(f,c-1);
+                this.encuentraMinas(f+1,c-1);
+                this.encuentraMinas(f+1,c);
+              }else {
+                this.encuentraMinas(f-1,c-1);
+                this.encuentraMinas(f-1,c);
+                this.encuentraMinas(f,c-1);
+                this.encuentraMinas(f+1,c-1);
+                this.encuentraMinas(f+1,c);
+              }
+            }
+
+
           expandePresion(f,c);
           cambiaColor(f+''+c,"presion");
 
@@ -808,16 +816,13 @@ constructor(props){
 
 handleClick(c,f,id){
   if(inicia==1){
-
-
- const squares =this.state.tablero.slice();
-
+  const squares =this.state.tablero.slice();
 		    console.log('Se hizo click');
 		    //squares[f][c]=f;
 		    console.log("L491:"+c+" : "+f);
-        if(this.encuentraMinas(f,c)==-2){
+        if(this.encuentraMinas(f,c)==-2) /*se descubre una bomba*/
+        {
           console.log("fin de juego");
-
           for (var i = 0; i < 9; i++) {
             console.log("i:"+i);
             for (var j = 0; j < 9; j++) {
@@ -829,15 +834,13 @@ handleClick(c,f,id){
               }
             }
           }
-
           alert("HAS PERDIDO! :( ");
           inicia=0;
-        }else{
+        }
+        else{  /*se elige una casilla vaciiia*/
           console.log("next");
           revisaGanador(squares);
-
         }
-
     }
  }
 
@@ -877,29 +880,15 @@ handleClick(c,f,id){
 			<div className="Estilo">
 
         <div style={Estilo}>
-  				<button className={"sinpresion"} id={'00'} onClick={() => this.handleClick(0,0,'00')}>
-            <div>
-            { this.muestra(0,0)}
-            </div>
-          </button>
-  				<button className={"sinpresion"} id={'01'} onClick={() => this.handleClick(1,0,'01')}>
-            { this.muestra(0,1)}
-          </button>
-  				<button className={"sinpresion"} id={'02'} onClick={() => this.handleClick(2,0,'02')}>
-            {this.muestra(0,2)}</button>
-  				<button className={"sinpresion"} id={'03'} onClick={() => this.handleClick(3,0,'03')}>
-            { this.muestra(0,3)}</button>
-  				<button className={"sinpresion"} id={'04'} onClick={() => this.handleClick(4,0,'04')}>
-            { this.muestra(0,4)}</button>
-  				<button className={"sinpresion"} id={'05'} onClick={() => this.handleClick(5,0,'05')}>
-            { this.muestra(0,5)}</button>
-  				<button className={"sinpresion"} id={'06'} onClick={() => this.handleClick(6,0,'06')}>
-            { this.muestra(0,6)}</button>
-  				<button className={"sinpresion"} id={'07'} onClick={() => this.handleClick(7,0,'07')}>
-            { this.muestra(0,7)}</button>
-  				<button className={"sinpresion"} id={'08'} onClick={() => this.handleClick(8,0,'08')}>
-            { this.muestra(0,8)}</button>
-  			</div>
+  				<button className={"sinpresion"} id={'00'} onClick={() => this.handleClick(0,0,'00')}>{this.muestra(0,0)}</button>
+  				<button className={"sinpresion"} id={'01'} onClick={() => this.handleClick(1,0,'01')}>{ this.muestra(0,1)}</button>
+  				<button className={"sinpresion"} id={'02'} onClick={() => this.handleClick(2,0,'02')}>{this.muestra(0,2)}</button>
+          <button className={"sinpresion"} id={'03'} onClick={() => this.handleClick(3,0,'03')}>{ this.muestra(0,3)}</button>
+  				<button className={"sinpresion"} id={'04'} onClick={() => this.handleClick(4,0,'04')}>{ this.muestra(0,4)}</button>
+  				<button className={"sinpresion"} id={'05'} onClick={() => this.handleClick(5,0,'05')}>{ this.muestra(0,5)}</button>
+  				<button className={"sinpresion"} id={'06'} onClick={() => this.handleClick(6,0,'06')}>{ this.muestra(0,6)}</button>
+  				<button className={"sinpresion"} id={'07'} onClick={() => this.handleClick(7,0,'07')}>{ this.muestra(0,7)}</button>
+  				<button className={"sinpresion"} id={'08'} onClick={() => this.handleClick(8,0,'08')}>{ this.muestra(0,8)}</button>	</div>
 
           <div style={Estilo}>
           <button className={"sinpresion"} id={'10'} onClick={() => this.handleClick(0,1,'10')}> {this.muestra(1,0)}</button>
