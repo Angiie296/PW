@@ -1,0 +1,163 @@
+*{
+	box-sizing: border-box;
+	margin:0px;
+	padding: 0px;
+}
+.body{
+	height: 9000px;
+	background-color: #a3e4d7;
+
+}
+.Estilo{
+	width: 100%;
+	text-align: center;
+	background-color: #a3e4d7;
+
+	padding-bottom:2;
+	font-family:"sans-serif";
+	font-size: 35px;
+	color:#999;
+	border-radius:5;
+}
+
+.minas{
+	width: 100%;
+	height: 90px;
+	flex-wrap: wrap;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 25px;
+	letter-spacing: 2px;
+	word-spacing: 2px;
+}
+
+/*.boton{
+
+		width: 80px;
+		height: 80px;
+}
+*/
+.boton{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #ffffff;
+    background-color:  #ec7063;
+    border-radius: 6px;
+    border: 2px solid  #a93226 ;
+  }
+  .boton:hover{
+    color: #ec7063;
+    background-color:  #a93226;
+  }
+
+
+.contiene1{
+	background-color: black;
+	width: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.contiene2{
+	background-color: black;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+.contenedor{
+	background-color: black;
+	width: auto;
+	height: 15%;
+	flex-wrap: wrap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/*justify-content: space-around;*/
+}
+.grandote{
+	display: flex;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+}
+.finjuego{
+	background: url(bomba1.png);
+	width: 8%;
+	height: 8%;
+	/*border-width: 3px;*/
+	align-items: center;
+	border-color:black ;
+}
+
+.isla{
+	/*background-color: green;*/
+	background: url(bomba3.png);
+	width: 8%;
+	height: 8%;
+	border-width: 1px;
+	border-color:black;
+}
+
+.sinpresion{
+	width: 8%;
+	height: 8%;
+	background-color: #afa8a8;
+	border-width: 1px;
+	/*border-color:white ;*/
+}
+
+.presion{
+	width: 8%;
+	height: 8%;
+	background-color:  white;
+	/*border-width: 1px;*/
+	/*border-color: black ;*/
+
+}
+
+.presionba{
+	background: url(one.png);
+	width: 8%;
+	height: 8%;
+	/*border-width: 3px;*/
+	align-items: center;
+	border-color:black ;
+}
+
+.presionbv{
+	background: url(two.png);
+	width: 8%;
+	height: 8%;
+	/*border-width: 3px;*/
+	align-items: center;
+	border-color:black ;
+}
+
+
+.presionbr{
+	background: url(three.png);
+	width: 8%;
+	height: 8%;
+	/*border-width: 3px;*/
+	align-items: center;
+	border-color:black ;
+}
+
+.presionbm {
+	background: url(four.png);
+	width: 8%;
+	height: 8%;
+	/*border-width: 3px;*/
+	align-items: center;
+	border-color:black ;
+}
